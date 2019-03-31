@@ -110,15 +110,12 @@ void runloop() {
   while (do_tick()) {
     usleep(10000);
 
-    if (c = getch() == 'q') {
-      return;
-    }
-
-    if (getch() == '\033') { // if the first value is esc
+    if (c = getch() == '\033') { // if the first value is esc
         getch(); // skip the [
         switch(getch()) { // the real value
             case 'A':
                 // code for arrow up
+//                printw("Key: %d", c);
                 ++r %= 4;
                 while (x + NUM(r, 16) > 9) {
                     x--;
@@ -130,6 +127,7 @@ void runloop() {
                 break;
             case 'B':
                 // code for arrow down
+//                printw("Key: %d", c);
                 while (!check_hit(x, y + 1, r)) {
                     y++;
                     update_piece();
@@ -139,17 +137,24 @@ void runloop() {
                 break;
             case 'C':
                 // code for arrow right
+//                printw("Key: %d", c);
                 if (x + NUM(r, 16) < 9 && !check_hit(x + 1, y, r)) {
                     x++;
                 }
                 break;
             case 'D':
                 // code for arrow left
+//                printw("Key: %d", c);
                 if (x > 0 && !check_hit(x - 1, y, r)) {
                     x--;
                 }
                 break;
         }
+    }
+
+    printw("HelloKey: %c", c);
+    if (c = getch() == 'q') {
+        return;
     }
     update_piece();
     frame();
