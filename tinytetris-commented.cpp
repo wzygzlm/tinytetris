@@ -109,32 +109,47 @@ int do_tick() {
 void runloop() {
   while (do_tick()) {
     usleep(10000);
-    if ((c = getch()) == 'a' && x > 0 && !check_hit(x - 1, y, r)) {
-      x--;
-    }
-    if (c == 'd' && x + NUM(r, 16) < 9 && !check_hit(x + 1, y, r)) {
-      x++;
-    }
-    if (c == 's') {
-      while (!check_hit(x, y + 1, r)) {
-        y++;
-        update_piece();
-      }
-      remove_line();
-      new_piece();
-    }
-    if (c == 'w') {
-      ++r %= 4;
-      while (x + NUM(r, 16) > 9) {
-        x--;
-      }
-      if (check_hit(x, y, r)) {
-        x = px;
-        r = pr;
-      }
-    }
-    if (c == 'q') {
+
+    if (c = getch() == 'q') {
       return;
+    }
+
+    if (getch() == '\033') { // if the first value is esc
+        getch(); // skip the [
+        switch(getch()) { // the real value
+            case 'A':
+                // code for arrow up
+                ++r %= 4;
+                while (x + NUM(r, 16) > 9) {
+                    x--;
+                }
+                if (check_hit(x, y, r)) {
+                    x = px;
+                    r = pr;
+                }
+                break;
+            case 'B':
+                // code for arrow down
+                while (!check_hit(x, y + 1, r)) {
+                    y++;
+                    update_piece();
+                }
+                remove_line();
+                new_piece();
+                break;
+            case 'C':
+                // code for arrow right
+                if (x + NUM(r, 16) < 9 && !check_hit(x + 1, y, r)) {
+                    x++;
+                }
+                break;
+            case 'D':
+                // code for arrow left
+                if (x > 0 && !check_hit(x - 1, y, r)) {
+                    x--;
+                }
+                break;
+        }
     }
     update_piece();
     frame();

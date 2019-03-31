@@ -9,9 +9,9 @@
 This is the 80x23 version. You control it with `a` (left), `d` (right), `w` (rotate),
 `s` (drop), and `q` (quit). It depends on `curses.h` (so you'll need to compile with
 `-lcurses`, and install curses if you don't already have it) and requires C++11.
-compile with gcc: gcc tinytetris.cpp -std=c++11 -lcurses -o tetris
+compile with gcc: gcc tinytetris.cpp -std=c++11 -lcurses -g -o tetris
 
 ### tinytetris-commented.cpp
 This one is almost identical to `tinytetris.cpp`, but not minified, and with some
 comments to make it easier to read (but it's still tricky to read in certain parts).
-compile with gcc: gcc tinytetris-commented.cpp -std=c++11 -lcurses -o tetris
+compile with gcc: gcc tinytetris-commented.cpp -std=c++11 -lcurses -g -o tetris
