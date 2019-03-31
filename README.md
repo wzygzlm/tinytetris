@@ -1,4 +1,4 @@
-# Forked version from https://github.com/wzygzlm/tinytetris.git
+# Forked version from https://github.com/taylorconor/tinytetris
 
 # tinytetris
 80x23 terminal tetris!
